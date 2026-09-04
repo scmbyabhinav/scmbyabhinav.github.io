@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="112" viewBox="0 0 760 112" role="img" aria-label="Wilmar International Singapore, Adani Wilmar and AWL Agri Business career lineage">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="112" viewBox="0 0 760 112" role="img" aria-label="Wilmar International Limited Singapore and AWL Agri Business">
 <rect width="760" height="112" fill="none"/>
-
-<!-- Wilmar International Limited, Singapore: clean self-contained vector wordmark approximation -->
+<!-- Wilmar International Limited, Singapore -->
 <g transform="translate(4 7)">
   <path d="M18 8 C29 1 40 3 49 13 C58 3 69 1 80 8 C68 10 60 18 49 31 C38 18 30 10 18 8Z" fill="#008b8b"/>
   <path d="M28 8 C35 10 42 16 49 25 C56 16 63 10 70 8 C62 18 56 29 49 38 C42 29 36 18 28 8Z" fill="#1aa6a0" opacity=".92"/>
@@ -9,20 +8,11 @@
   <text x="50" y="78" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="7.5" font-weight="700" letter-spacing="1.1" fill="#6d7885">INTERNATIONAL LIMITED</text>
   <text x="50" y="92" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8.5" font-weight="700" fill="#5d6a7e">SINGAPORE</text>
 </g>
-
-<!-- Lineage connector -->
-<text x="155" y="55" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="400" fill="#c4ccd7">→</text>
-
-<!-- Former Adani Wilmar identity -->
-<text x="205" y="55" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" letter-spacing="-3" fill="#1682b8">adani</text>
-<text x="207" y="78" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="700" fill="#5d6a7e">ADANI WILMAR · FORMER NAME</text>
-
-<text x="375" y="55" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="400" fill="#c4ccd7">→</text>
-
+<!-- Direct corporate relationship -->
+<text x="165" y="55" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="400" fill="#c4ccd7">→</text>
 <!-- Current AWL identity -->
-<text x="426" y="55" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#0b9d96">AWL</text>
-<text x="536" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#24384d">Agri Business</text>
-<text x="428" y="78" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="700" fill="#5d6a7e">CURRENT IDENTITY · AWL AGRI BUSINESS LIMITED</text>
-
-<text x="380" y="103" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" letter-spacing="1.1" fill="#9a6c00">WILMAR INTERNATIONAL · SINGAPORE  →  ADANI WILMAR  →  AWL AGRI BUSINESS</text>
+<text x="232" y="55" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#0b9d96">AWL</text>
+<text x="342" y="55" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#24384d">Agri Business</text>
+<text x="234" y="78" font-family="Arial, Helvetica, sans-serif" font-size="9.5" font-weight="700" fill="#5d6a7e">CURRENT IDENTITY · AWL AGRI BUSINESS LIMITED</text>
+<text x="330" y="103" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" letter-spacing="1.1" fill="#9a6c00">WILMAR INTERNATIONAL LIMITED · SINGAPORE → AWL AGRI BUSINESS</text>
 </svg>
