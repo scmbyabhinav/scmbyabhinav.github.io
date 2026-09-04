@@ -40,3 +40,14 @@ fetch('style-v2.css?cache=20260904',{cache:'no-store'})
     document.head.appendChild(style);
   }
 })();
+
+// Resume protection: always route the website's Resume button to the
+// password-encrypted PDF stored under /documents, never the legacy public PDF.
+(function(){
+  const resume=document.querySelector('.resume');
+  if(resume){
+    resume.href='documents/Abhinav_Bajpai_Resume_Password_Protected.pdf';
+    resume.target='_blank';
+    resume.rel='noopener';
+  }
+})();
