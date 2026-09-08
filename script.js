@@ -1,53 +1,53 @@
-const progress=document.querySelector('.progress');window.addEventListener('scroll',()=>{if(!progress)return;const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(h>0?(scrollY/h)*100:0)+'%';},{passive:true});
+const progress=document.querySelector('.progress');
+window.addEventListener('scroll',()=>{if(!progress)return;const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(h>0?(scrollY/h)*100:0)+'%';},{passive:true});
 
-// Fallback stylesheet loader: applies the site's CSS even if GitHub Pages/browser
-// serves the CSS asset with a non-standard MIME type or stale stylesheet cache.
-fetch('style-v2.css?cache=20260904',{cache:'no-store'})
-  .then(response=>response.text())
-  .then(css=>{
-    if(!document.getElementById('site-css-fallback')){
-      const style=document.createElement('style');
-      style.id='site-css-fallback';
-      style.textContent=css;
-      document.head.appendChild(style);
-    }
-  })
-  .catch(()=>{});
+// Fallback stylesheet loader.
+fetch('style-v2.css?cache=20260908',{cache:'no-store'}).then(r=>r.text()).then(css=>{if(!document.getElementById('site-css-fallback')){const s=document.createElement('style');s.id='site-css-fallback';s.textContent=css;document.head.appendChild(s);}}).catch(()=>{});
 
-// Profile-card employer identity: current AWL identity with the former
-// Adani Wilmar identity shown as a clear historical company name/logo.
+// Resume routing.
+(function(){const resume=document.querySelector('.resume');if(resume){resume.href='documents/Abhinav_Bajpai_Resume_Password_Protected.pdf';resume.target='_blank';resume.rel='noopener';}})();
+
+// Shared premium navigation: turns the portfolio into a real multi-page experience.
 (function(){
-  const logos=document.querySelector('.profile-card .career-logos');
-  if(!logos)return;
-  logos.innerHTML=`
-    <div class="career-logo awl-career-logo" title="AWL Agri Business">AWL <span>Agri business</span></div>
-    <div class="career-former">
-      <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Adani_Wilmar.svg" alt="Adani Wilmar logo" loading="lazy">
-      <span>Formerly Adani Wilmar Ltd.</span>
-    </div>`;
-  logos.setAttribute('aria-label','AWL Agri Business, formerly Adani Wilmar Limited');
-
-  if(!document.getElementById('profile-employer-style')){
-    const style=document.createElement('style');
-    style.id='profile-employer-style';
-    style.textContent=`
-      .profile-card .career-logos{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-      .profile-card .career-former{display:flex;align-items:center;gap:7px;padding:5px 8px;border:1px solid #e1e6ee;border-radius:7px;background:#fff;box-shadow:0 3px 10px #0717350b;min-height:38px}
-      .profile-card .career-former img{display:block;width:78px;height:30px;object-fit:contain;object-position:center}
-      .profile-card .career-former span{font-size:7px;font-weight:700;line-height:1.25;color:#5d6a7e;max-width:105px}
-      @media(max-width:600px){.profile-card .career-former img{width:68px}.profile-card .career-former span{max-width:90px}}
-    `;
-    document.head.appendChild(style);
-  }
+ const nav=document.querySelector('.nav nav'); if(!nav)return;
+ const path=location.pathname.split('/').pop()||'index.html';
+ const items=[['index.html','Home'],['profile.html','Profile'],['experience.html','Experience'],['projects.html','Projects'],['contact.html','Contact']];
+ nav.innerHTML=items.map(([href,label])=>`<a href="${href}" class="${path===href?'active':''}">${label}</a>`).join('');
+ const header=document.querySelector('.nav');
+ if(header&&!header.querySelector('.nav-tools')){
+   const tools=document.createElement('div');tools.className='nav-tools';
+   tools.innerHTML='<button class="theme-toggle" type="button" aria-label="Toggle theme">◐</button><button class="menu-toggle" type="button" aria-label="Open menu">☰</button>';
+   header.appendChild(tools);
+   const menu=tools.querySelector('.menu-toggle');menu.addEventListener('click',()=>{nav.classList.toggle('mobile-open');menu.textContent=nav.classList.contains('mobile-open')?'×':'☰';});
+   tools.querySelector('.theme-toggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark');localStorage.setItem('ab-theme',document.documentElement.classList.contains('dark')?'dark':'light');});
+ }
+ if(localStorage.getItem('ab-theme')==='dark')document.documentElement.classList.add('dark');
+ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('mobile-open')));
 })();
 
-// Resume protection: always route the website's Resume button to the
-// password-encrypted PDF stored under /documents, never the legacy public PDF.
+// Scroll reveal using IntersectionObserver — lightweight, no libraries.
 (function(){
-  const resume=document.querySelector('.resume');
-  if(resume){
-    resume.href='documents/Abhinav_Bajpai_Resume_Password_Protected.pdf';
-    resume.target='_blank';
-    resume.rel='noopener';
-  }
+ const els=document.querySelectorAll('section,.brand-card,.sector-grid article,.expertise-grid article,.project-grid article,.metrics>div,.impact-grid>div,.contact-cards>a,.career-timeline article,.feature-panel,.process-strip>div');
+ if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('is-visible'));return;}
+ els.forEach((e,i)=>{e.classList.add('reveal');e.style.setProperty('--delay',`${Math.min(i%6,5)*55}ms`);});
+ const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -40px'});
+ els.forEach(e=>io.observe(e));
+})();
+
+// Animated counters for numeric impact cards. Text is preserved; only plain numeric values are animated.
+(function(){
+ document.querySelectorAll('[data-count]').forEach(el=>{const target=Number(el.dataset.count);const suffix=el.dataset.suffix||'';let started=false;const run=()=>{if(started)return;started=true;const t0=performance.now(),dur=1100;const tick=now=>{const p=Math.min((now-t0)/dur,1),v=Math.round(target*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('en-IN')+suffix;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)};new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&run()),{threshold:.7}).observe(el);});
+})();
+
+// Projects page filters.
+(function(){
+ const buttons=document.querySelectorAll('.filter');const cards=document.querySelectorAll('.project-grid article[data-category]');if(!buttons.length)return;
+ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;cards.forEach(c=>{const show=f==='all'||c.dataset.category===f;c.classList.toggle('filtered-out',!show);if(show)c.classList.add('is-visible');});}));
+})();
+
+// Employer identity enhancement on the home profile card.
+(function(){
+ const logos=document.querySelector('.profile-card .career-logos');if(!logos)return;
+ logos.innerHTML='<div class="career-logo awl-career-logo">AWL <span>Agri business</span></div><div class="career-former"><span>Formerly Adani Wilmar Ltd.</span></div>';
+ logos.setAttribute('aria-label','AWL Agri Business, formerly Adani Wilmar Limited');
 })();
