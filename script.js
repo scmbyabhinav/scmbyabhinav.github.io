@@ -2,7 +2,7 @@ const progress=document.querySelector('.progress');
 window.addEventListener('scroll',()=>{if(!progress)return;const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(h>0?(scrollY/h)*100:0)+'%';},{passive:true});
 
 // Fallback stylesheet loaders keep GitHub Pages cache/MIME edge cases harmless.
-Promise.all(['style-v2.css?cache=20260908','premium.css?cache=20260908','executive-v5.css?cache=20260910'].map(u=>fetch(u,{cache:'no-store'}).then(r=>r.text()).catch(()=>''))).then(cssList=>cssList.forEach((css,i)=>{if(!css)return;const ids=['site-css-fallback','premium-css-fallback','executive-css-fallback'];const id=ids[i];if(!document.getElementById(id)){const s=document.createElement('style');s.id=id;s.textContent=css;document.head.appendChild(s);}}));
+Promise.all(['style-v2.css?cache=20260908','premium.css?cache=20260908','executive-v5.css?cache=20260914'].map(u=>fetch(u,{cache:'no-store'}).then(r=>r.text()).catch(()=>''))).then(cssList=>cssList.forEach((css,i)=>{if(!css)return;const ids=['site-css-fallback','premium-css-fallback','executive-css-fallback'];const id=ids[i];if(!document.getElementById(id)){const s=document.createElement('style');s.id=id;s.textContent=css;document.head.appendChild(s);}}));
 
 // Technical SEO metadata + JSON-LD. Runs on every page so page titles, canonical URLs,
 // social previews and structured data stay consistent across the static GitHub Pages site.
