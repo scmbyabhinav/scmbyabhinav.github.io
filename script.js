@@ -4,6 +4,10 @@ window.addEventListener('scroll',()=>{if(!progress)return;const h=document.docum
 // Fallback stylesheet loaders keep GitHub Pages cache/MIME edge cases harmless.
 Promise.all(['style-v2.css?cache=20260908','premium.css?cache=20260908','executive-v5.css?cache=20260910'].map(u=>fetch(u,{cache:'no-store'}).then(r=>r.text()).catch(()=>''))).then(cssList=>cssList.forEach((css,i)=>{if(!css)return;const ids=['site-css-fallback','premium-css-fallback','executive-css-fallback'];const id=ids[i];if(!document.getElementById(id)){const s=document.createElement('style');s.id=id;s.textContent=css;document.head.appendChild(s);}}));
 
+// Technical SEO metadata + JSON-LD. Runs on every page so page titles, canonical URLs,
+// social previews and structured data stay consistent across the static GitHub Pages site.
+(function(){const s=document.createElement('script');s.src='seo.js?cache=20260914';s.defer=true;document.head.appendChild(s);})();
+
 // Resume routing.
 (function(){const resume=document.querySelector('.resume');if(resume){resume.href='documents/Abhinav_Bajpai_Resume_Password_Protected.pdf';resume.target='_blank';resume.rel='noopener';}})();
 
@@ -21,3 +25,21 @@ Promise.all(['style-v2.css?cache=20260908','premium.css?cache=20260908','executi
 
 // Employer identity enhancement on the home profile card.
 (function(){const logos=document.querySelector('.profile-card .career-logos');if(!logos)return;logos.innerHTML='<div class="career-logo awl-career-logo">AWL <span>Agri business</span></div><div class="career-former"><span>Formerly Adani Wilmar Ltd.</span></div>';logos.setAttribute('aria-label','AWL Agri Business, formerly Adani Wilmar Limited');})();
+
+/* Optional private owner counter.
+   When a GoatCounter site is configured, add a meta tag named analytics-goatcounter
+   with the site's /count endpoint. The owner-only panel remains invisible until
+   Alt+Shift+A is pressed. No tracking service is contacted unless configured.
+*/
+(function(){
+  const endpointMeta=document.querySelector('meta[name="analytics-goatcounter"]');
+  if(!endpointMeta||!endpointMeta.content)return;
+  const endpoint=endpointMeta.content.replace(/\/$/,'');
+  const panel=document.createElement('aside');panel.id='owner-stats';panel.setAttribute('aria-label','Private site analytics');
+  panel.innerHTML='<span>PRIVATE SITE STATS</span><b id="owner-visits">—</b><small>visits on this page</small>';
+  Object.assign(panel.style,{position:'fixed',right:'16px',bottom:'16px',zIndex:'9999',display:'none',padding:'12px 14px',border:'1px solid rgba(120,130,150,.25)',borderRadius:'12px',background:'rgba(12,18,32,.94)',color:'#fff',font:'12px/1.3 Arial,sans-serif',boxShadow:'0 12px 35px rgba(0,0,0,.22)',textAlign:'right'});
+  document.body.appendChild(panel);
+  let loaded=false;
+  async function loadCount(){if(loaded)return;loaded=true;try{const path=encodeURIComponent(location.pathname);const r=await fetch(endpoint+'/counter/'+path+'.json',{cache:'no-store'});if(!r.ok)throw new Error('counter');const d=await r.json();document.querySelector('#owner-visits').textContent=d.count||'0';}catch(e){document.querySelector('#owner-visits').textContent='—';}}
+  window.addEventListener('keydown',e=>{if(e.altKey&&e.shiftKey&&e.key.toLowerCase()==='a'){panel.style.display=panel.style.display==='none'?'block':'none';if(panel.style.display==='block')loadCount();}});
+})();
