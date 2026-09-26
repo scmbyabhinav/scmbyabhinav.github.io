@@ -19,9 +19,10 @@
     'commercial-vs-supply-chain.html':{title:'Commercial vs Supply Chain | Abhinav Bajpai',description:'How commercial control and physical supply-chain execution connect in complex operations.',keywords:'commercial supply chain, supply chain professional, commercial operations, Abhinav Bajpai'},
     'mundra-supply-chain-operations.html':{title:'Mundra Supply Chain Operations | Abhinav Bajpai',description:'A practical perspective on port-to-plant-to-market supply chain operations at Mundra.',keywords:'Mundra supply chain, Adani Wilmar, AWL, supply chain professional, port operations'},
     'gst-customs-supply-chain.html':{title:'GST and Customs in Supply Chain | Abhinav Bajpai',description:'How GST, Customs, documentation and commercial controls connect with supply-chain execution.',keywords:'GST supply chain, Customs supply chain, commercial control, supply chain professional'},
-    'high-volume-dispatch.html':{title:'High Volume Dispatch Operations | Abhinav Bajpai',description:'A practical framework for vehicle planning, dispatch control, logistics and operational visibility.',keywords:'high volume dispatch, logistics, supply chain professional, dispatch operations, Abhinav Bajpai'}
+    'high-volume-dispatch.html':{title:'High Volume Dispatch Operations | Abhinav Bajpai',description:'A practical framework for vehicle planning, dispatch control, logistics and operational visibility.',keywords:'high volume dispatch, logistics, supply chain professional, dispatch operations, Abhinav Bajpai'},
+    'insights/index.html':{title:'Supply Chain Insights | Abhinav Bajpai',description:'Supply chain, commercial, procurement, logistics, GST, Customs and operations insights from Abhinav Bajpai.',keywords:'supply chain insights, supply chain professional, supply chain management, commercial operations, procurement, logistics, Abhinav Bajpai'}
   };
-  const p=pages[file]||pages['index.html'];
+  const p=pages[path]||pages[file]||pages['index.html'];
   const canonical=base+'/'+path;
   document.title=p.title;
   const set=(name,content)=>{let el=document.querySelector('meta[name="'+name+'"]');if(!el){el=document.createElement('meta');el.name=name;document.head.appendChild(el)}el.content=content};
